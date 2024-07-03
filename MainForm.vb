@@ -856,7 +856,6 @@ Public Class FormDirect
             ' Add values to the lists
             freqList.Add(selectedFreq / 1000000) ' Convert to MHz for plotting
             dutAFList.Add(CDbl(TBDUTAF.Text))
-            dutAGList.Add(CDbl(TBDUTAG.Text))
 
             AddToList(selectedFreq)
             selectedFreq += stepFreq
