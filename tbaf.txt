@@ -1,0 +1,119 @@
+Private Sub TBMeasDistance_Validated(sender As Object, e As EventArgs) Handles TBMeasDistance.Validated
+    ' Ensure startFreq and stopFreq are filled in correctly
+    If TBFStart.Text = "" Or TBFStop.Text = "" Then
+        MsgBox("Please enter valid start and stop frequencies.")
+        Return
+    End If
+
+    ' Get the start and stop frequencies
+    Dim startFreq As Double = CDbl(Val(TBFStart.Text)) * 1000000 ' Convert MHz to Hz
+    Dim stopFreq As Double = CDbl(Val(TBFStop.Text)) * 1000000 ' Convert MHz to Hz
+
+    ' Get the step frequency
+    Dim stepFreq As Double = GetStepFrequency()
+
+    ' Initialize lists for frequencies, DUTAF, and antennaFactors
+    Dim frequencies As New List(Of Double)
+    Dim antennaFactors As New List(Of Double)
+    Dim DUTAF As New List(Of Double)
+
+    ' Add header to TBAFList with the correct format
+    TBAFList.Text = String.Format("{0,-20}{1,-20}{2,-20}" & vbCrLf, "Frequency (Hz)", "Antenna Factor (dB/m)", "Antenna Gain (dBi)")
+
+    ' Clear the ComboBox before adding new frequencies
+    CBBFreq.Items.Clear()
+
+    ' Iterate through each frequency step
+    Dim currentFreq As Double = startFreq
+    While currentFreq <= stopFreq
+        ' Calculate FSL using the correct formula
+        Dim distance As Double = Val(TBMeasDistance.Text)
+        Dim FSL As Double = 20 * Math.Log10(distance) + 20 * Math.Log10(currentFreq) - 147.55
+
+        ' Format FSL value and display it
+        TBFSL.Text = FormatNumber(FSL, 1, TriState.False, , TriState.True)
+
+        ' Calculate DUT AG based on the frequency
+        Dim DUTAG As Double = Val(TBEIRPow.Text) - Val(CBTGLvl.SelectedItem)
+
+        ' Calculate DUT AF
+        Dim DUTAFValue As Double = (20 * Math.Log10(currentFreq / 1000)) - DUTAG - 29.7707
+        DUTAF.Add(DUTAFValue)
+
+        ' Calculate the antenna factor
+        Dim antennaFactor As Double = 20 * Math.Log10(currentFreq)
+        antennaFactors.Add(antennaFactor)
+
+        ' Store the current frequency
+        frequencies.Add(currentFreq)
+
+        ' Add the frequency to the ComboBox
+        CBBFreq.Items.Add(currentFreq)
+
+        ' Add the result to TBAFList with a neat format
+        TBAFList.Text &= String.Format("{0,-20:F2}{1,-35:F2}{2,-35:F2}" & vbCrLf, currentFreq, DUTAFValue, antennaFactor)
+
+        ' Increment the frequency
+        currentFreq += stepFreq
+    End While
+
+    ' Call function to plot the graph
+    PlotFAF(frequencies.ToArray(), antennaFactors.ToArray(), DUTAF.ToArray())
+End Sub
+
+Private Sub BAddToListAPList_Click(sender As Object, e As EventArgs) Handles BAddToListAPList.Click
+    ' Validasi jarak pengukuran
+    If Val(TBMeasDistance.Text) <= 0 Then
+        MsgBox("Input DUT Antenna to Reference Antenna Distance")
+        Return
+    End If
+
+    ' Validasi koneksi TCP
+    If Not TCPconnected Then
+        MsgBox("TCP connection is not established.")
+        Return
+    End If
+
+    ' Adjust the loop to use stepFreq for iteration
+    Dim startFreq As Double = CDbl(Val(TBFStart.Text)) * 1000000 ' Convert to Hz
+    Dim stopFreq As Double = CDbl(Val(TBFStop.Text)) * 1000000 ' Convert to Hz
+
+    ' Get the step frequency
+    Dim stepFreq As Double = GetStepFrequency()
+
+    ' Menghitung nilai TBPowerdBm dari TCP
+    Dim TBPowerdBmValue As Double = 0.0
+    If TCPconnected Then
+        TBPowerdBm.Text = CStr(Val(SendTCP(":TRACe:DATA? TRACE1")(150)))
+        TBPowerdBm.Text = FormatNumber(TBPowerdBm.Text, 1, TriState.False, , TriState.True)
+        TBPowerdBmValue = CDbl(TBPowerdBm.Text)
+    End If
+
+    ' Menghitung nilai TBEIRPow
+    TBEIRPow.Text = CStr(TBPowerdBmValue - Val(TBCorFac.Text) + Val(TBFSL.Text))
+    TBEIRPow.Text = FormatNumber(TBEIRPow.Text, 1, TriState.False, , TriState.True)
+
+    ' Initialize the frequencies and antennaFactors arrays dynamically based on the number of steps
+    Dim stepsCount As Integer = Math.Floor((stopFreq - startFreq) / stepFreq) + 1
+    Dim frequencies(stepsCount - 1) As Double
+    Dim antennaFactors(stepsCount - 1) As Double
+
+    ' Clear the ComboBox before adding new frequencies
+    CBBFreq.Items.Clear()
+
+    Dim currentFreq As Double = startFreq
+    For i As Integer = 0 To stepsCount - 1
+        ' Process the current frequency
+        frequencies(i) = currentFreq
+
+        ' Add the frequency to the ComboBox
+        CBBFreq.Items.Add(currentFreq)
+
+        ' Menghitung DUT AF menggunakan rumus AF = 20 * log10(FS / V) dengan variasi
+        Dim FCval As Double = currentFreq
+        Dim TBDUTAG As Double = Val(TBEIRPow.Text) - Val(CBTGLvl.SelectedItem)
+        Dim TBDUTAF As Double = (20 * Math.Log10(FCval / 1000)) - TBDUTAG - 29.7707
+        antennaFactors(i) = TBDUTAF
+        currentFreq += stepFreq
+    Next
+End Sub
