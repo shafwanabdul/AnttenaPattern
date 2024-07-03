@@ -747,7 +747,7 @@ Public Class FormDirect
         End With
     End Sub
     Private Sub BClearAFlist_Click(sender As Object, e As EventArgs) Handles BClearAFlist.Click
-        TBAFList.Text = "Frequency,(Hz) ),Antenna Factor(dB/m),Antenna Gain(dBi)"
+        TBAFList.Text = String.Format("{0,-20}{1,-30}{2,-30}" & vbCrLf, "Frequency", "AntennaFactor(dB/m)", "AntennaGain(dBi)")
         CHAPP.Series(0).Points.Clear()
     End Sub
     Private Sub BAutoscalePol_Click(sender As Object, e As EventArgs) Handles BAutoscalePol.Click
@@ -758,7 +758,7 @@ Public Class FormDirect
 
 
 
-    Private Sub PlotFAF(ByVal selectedFreq() As Double, ByVal DUTAF() As Double, ByVal DUTAG() As Double)
+    Private Sub PlotFAF(ByVal selectedFreq() As Double, ByVal DUTAF() As Double)
         ' Create an array for the X-axis
         Dim x(selectedFreq.Length - 1) As Double
         For i As Integer = 0 To selectedFreq.Length - 1
@@ -770,21 +770,16 @@ Public Class FormDirect
         ZedFAF.GraphPane.CurveList.Clear()
 
         ' Add a curve for antenna factors to the graph
-        Dim curveDUTAF As LineItem = ZedFAF.GraphPane.AddCurve("Antenna Gain Vs Frequency", x, DUTAF, Color.DarkRed, SymbolType.Circle)
+        Dim curveDUTAF As LineItem = ZedFAF.GraphPane.AddCurve("Antenna Factor Vs Frequency", x, DUTAF, Color.DarkRed, SymbolType.Circle)
         curveDUTAF.Line.IsVisible = True ' Show the curve line
         curveDUTAF.Symbol.Fill = New Fill(Color.DarkRed) ' Fill the symbol with the same color
-
-        ' Add a curve for antenna factors to the graph
-        Dim curveDUTAG As LineItem = ZedFAF.GraphPane.AddCurve("Antenna Factor Vs Frequency", x, DUTAG, Color.DarkGreen, SymbolType.Circle)
-        curveDUTAG.Line.IsVisible = True ' Show the curve line
-        curveDUTAG.Symbol.Fill = New Fill(Color.DarkGreen) ' Fill the symbol with the same color
 
         ' Set graph titles and scales
         ZedFAF.GraphPane.IsShowTitle = False
         ZedFAF.GraphPane.XAxis.Title = "Frequency"
         ZedFAF.GraphPane.YAxis.Title = "(dBi)"
-        ZedFAF.GraphPane.YAxis.Max = Math.Max(DUTAF.Max(), DUTAG.Max()) ' Adjust Y axis max based on both arrays
-        ZedFAF.GraphPane.YAxis.Min = Math.Min(DUTAF.Min(), DUTAG.Min()) ' Adjust Y axis min based on both arrays
+        ZedFAF.GraphPane.YAxis.Max = DUTAF.Max() ' Adjust Y axis max based on both arrays
+        ZedFAF.GraphPane.YAxis.Min = DUTAF.Min() ' Adjust Y axis min based on both arrays
         ZedFAF.GraphPane.XAxis.ScaleMag = 0
         ZedFAF.AxisChange()
 
@@ -861,7 +856,7 @@ Public Class FormDirect
         Loop
 
         ' Call PlotFAF with the accumulated values
-        PlotFAF(freqList.ToArray(), dutAFList.ToArray(), dutAGList.ToArray())
+        PlotFAF(freqList.ToArray(), dutAFList.ToArray())
     End Sub
 
 
@@ -895,11 +890,9 @@ Public Class FormDirect
         End If
 
         ' Format the entry as comma-separated values
-        Dim entry As String = $"{selectedFreq}, {TBDUTAF.Text}, {TBDUTAG.Text}"
+        Dim entry As String = $"{selectedFreq / 1000000} MHz, {TBDUTAF.Text}, {TBDUTAG.Text}"
         TBAFList.AppendText(entry & Environment.NewLine)
     End Sub
-
-
 
     Private Sub TBMeasDistance_Validated(sender As Object, e As EventArgs) Handles TBMeasDistance.Validated
         ' Ensure startFreq and stopFreq are filled in correctly
@@ -915,9 +908,8 @@ Public Class FormDirect
         ' Get the step frequency
         Dim stepFreq As Double = GetStepFrequency()
 
-
         ' Add header to TBAFList with the correct format
-        TBAFList.Text = String.Format("{0,-20}{1,-30}{2,-30}" & vbCrLf, "Frequency (Hz)", "Antenna Factor (dB/m)", "Antenna Gain (dBi)")
+        TBAFList.Text = String.Format("{0,-20}{1,-30}{2,-30}" & vbCrLf, "Frequency", "AntennaFactor(dB/m)", "AntennaGain(dBi)")
 
         ' Clear the ComboBox before adding new frequencies
         CBBFreq.Items.Clear()
@@ -926,14 +918,18 @@ Public Class FormDirect
         Dim selectedFreq As Double = startFreq
         While selectedFreq <= stopFreq
 
-            ' Add the frequency to the ComboBox
-            CBBFreq.Items.Add(selectedFreq)
+            ' Add the frequency to the ComboBox in MHz
+            Dim freqInMHz As Double = selectedFreq / 1000000
+            CBBFreq.Items.Add(freqInMHz)
 
             ' Increment the frequency
             selectedFreq += stepFreq
         End While
 
     End Sub
+
+
+
     Private Sub TBAF_Validated(sender As Object, e As EventArgs) Handles TBAF.Validated
         TBAntCorr.Text = CStr((20 * Log10(currentFreq / 1000)) - Val(TBAF.Text) - 29.7707)
         TBAntCorr.Text = FormatNumber(TBAntCorr.Text, 1, TriState.False, , TriState.True)
@@ -1375,19 +1371,27 @@ Public Class FormDirect
 
     End Sub
 
-    Private Sub ComboBox2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CBBFStep.SelectedIndexChanged
-
-    End Sub
-
     Private Function GetStepFrequency() As Double
         ' Assuming the step frequency is in KHz or MHz
         Dim stepFrequency As Double = 0.0
         Dim stepText As String = CBBFStep.SelectedItem.ToString()
 
-        If stepText.EndsWith("KHz") Then
-            stepFrequency = CDbl(stepText.Replace(" KHz", "")) * 1000 ' Convert KHz to Hz
-        ElseIf stepText.EndsWith("MHz") Then
-            stepFrequency = CDbl(stepText.Replace(" MHz", "")) * 1000000 ' Convert MHz to Hz
+        If stepText.EndsWith(" KHz") Then
+            Dim value As String = stepText.Replace(" KHz", "")
+            If Double.TryParse(value, stepFrequency) Then
+                stepFrequency *= 1000 ' Convert KHz to Hz
+            Else
+                ' Handle parsing error
+                MessageBox.Show("Invalid frequency value")
+            End If
+        ElseIf stepText.EndsWith(" MHz") Then
+            Dim value As String = stepText.Replace(" MHz", "")
+            If Double.TryParse(value, stepFrequency) Then
+                stepFrequency *= 1000000 ' Convert MHz to Hz
+            Else
+                ' Handle parsing error
+                MessageBox.Show("Invalid frequency value")
+            End If
         End If
 
         Return stepFrequency
@@ -1400,16 +1404,22 @@ Public Class FormDirect
             CBBFStep.Items.Add(i & " MHz")
         Next
 
+        ' Set default selection to avoid crashes
+        If CBBFStep.Items.Count > 0 Then
+            CBBFStep.SelectedIndex = 0
+        End If
     End Sub
 
-
-
+    Private Sub CBBFStep_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CBBFStep.SelectedIndexChanged
+        ' You can handle selection changes here if needed
+    End Sub
     Private Sub CBBFreq_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CBBFreq.SelectedIndexChanged
-        ' Get the selected frequency
-        Dim selectedFreq As Double = CDbl(CBBFreq.SelectedItem)
+        ' Get the selected frequency in MHz and convert it to Hz
+        Dim selectedFreqMHz As Double = CDbl(CBBFreq.SelectedItem)
+        Dim selectedFreqHz As Double = selectedFreqMHz * 1000000
 
-        ' Calculate and display the values
-        UpdateCalculatedValues(selectedFreq)
+        ' Calculate and display the values using the frequency in Hz
+        UpdateCalculatedValues(selectedFreqHz)
     End Sub
 
 

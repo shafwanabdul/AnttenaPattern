@@ -1654,7 +1654,7 @@ Partial Class FormDirect
         '
         Me.CBYminFAF.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.CBYminFAF.FormattingEnabled = True
-        Me.CBYminFAF.Items.AddRange(New Object() {"+20 dB", "+10 dB", "     0 dB", " -10 dB", " -20 dB", " -30 dB", " -40 dB", " -50 dB", " -60 dB", " -70 dB", " -80 dB", " -90 dB", "-100 dB", "-110 dB", "-120 dB", "-130 dB", "-140 dB", "-150 dB", "-160 dB", "-170 dB", "-180 dB"})
+        Me.CBYminFAF.Items.AddRange(New Object() {"+100 dB", "+90 dB", "+80 dB", "+70 dB", "+60 dB", "+50 dB", "+40 dB", "+30 dB", "+20 dB", "+10 dB", "     0 dB", " -10 dB", " -20 dB", " -30 dB", " -40 dB", " -50 dB", " -60 dB", " -70 dB", " -80 dB", " -90 dB", "-100 dB", "-110 dB", "-120 dB", "-130 dB", "-140 dB", "-150 dB", "-160 dB", "-170 dB", "-180 dB"})
         Me.CBYminFAF.Location = New System.Drawing.Point(749, 316)
         Me.CBYminFAF.Name = "CBYminFAF"
         Me.CBYminFAF.Size = New System.Drawing.Size(65, 21)
