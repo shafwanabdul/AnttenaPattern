@@ -184,9 +184,10 @@ Partial Class FormDirect
         Me.CBYminFAF = New System.Windows.Forms.ComboBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.ZedFAF = New ZedGraph.ZedGraphControl()
         Me.SerialPort = New System.IO.Ports.SerialPort(Me.components)
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
         Me.StatusStrip1.SuspendLayout()
         Me.MenuStrip.SuspendLayout()
         Me.GBSpecControl.SuspendLayout()
@@ -215,7 +216,7 @@ Partial Class FormDirect
         Me.StatusStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible
         Me.StatusStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TS_ETH_TX, Me.TSrtxstat, Me.TSSLSeparator, Me.Statusbarcon, Me.ToolStripStatusLabel4, Me.TSSLTTStatus})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 539)
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 554)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Size = New System.Drawing.Size(828, 22)
         Me.StatusStrip1.TabIndex = 0
@@ -1231,11 +1232,12 @@ Partial Class FormDirect
         Me.Func_tab.Location = New System.Drawing.Point(0, 28)
         Me.Func_tab.Name = "Func_tab"
         Me.Func_tab.SelectedIndex = 0
-        Me.Func_tab.Size = New System.Drawing.Size(940, 612)
+        Me.Func_tab.Size = New System.Drawing.Size(940, 627)
         Me.Func_tab.TabIndex = 3
         '
         'Setting
         '
+        Me.Setting.Controls.Add(Me.CheckBox2)
         Me.Setting.Controls.Add(Me.Label2)
         Me.Setting.Controls.Add(Me.BStopAP)
         Me.Setting.Controls.Add(Me.BAntPattern)
@@ -1246,7 +1248,7 @@ Partial Class FormDirect
         Me.Setting.Controls.Add(Me.GBControl)
         Me.Setting.Location = New System.Drawing.Point(4, 22)
         Me.Setting.Name = "Setting"
-        Me.Setting.Size = New System.Drawing.Size(932, 586)
+        Me.Setting.Size = New System.Drawing.Size(932, 601)
         Me.Setting.TabIndex = 4
         Me.Setting.Text = "Setting"
         Me.Setting.UseVisualStyleBackColor = True
@@ -1616,6 +1618,7 @@ Partial Class FormDirect
         '
         'TXYFAF
         '
+        Me.TXYFAF.Controls.Add(Me.CheckBox1)
         Me.TXYFAF.Controls.Add(Me.Label6)
         Me.TXYFAF.Controls.Add(Me.CBYmaxFAF)
         Me.TXYFAF.Controls.Add(Me.CBYminFAF)
@@ -1675,7 +1678,6 @@ Partial Class FormDirect
         Me.GroupBox2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GroupBox2.Controls.Add(Me.CheckBox1)
         Me.GroupBox2.Controls.Add(Me.ZedFAF)
         Me.GroupBox2.Location = New System.Drawing.Point(7, 6)
         Me.GroupBox2.Name = "GroupBox2"
@@ -1683,18 +1685,6 @@ Partial Class FormDirect
         Me.GroupBox2.TabIndex = 15
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "AP Caertesian Plot"
-        '
-        'CheckBox1
-        '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Checked = True
-        Me.CheckBox1.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CheckBox1.Location = New System.Drawing.Point(598, 418)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(122, 17)
-        Me.CheckBox1.TabIndex = 64
-        Me.CheckBox1.Text = "Tool tip Help Enable"
-        Me.CheckBox1.UseVisualStyleBackColor = True
         '
         'ZedFAF
         '
@@ -1714,12 +1704,36 @@ Partial Class FormDirect
         'SerialPort
         '
         '
+        'CheckBox1
+        '
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Checked = True
+        Me.CheckBox1.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CheckBox1.Location = New System.Drawing.Point(702, 469)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(122, 17)
+        Me.CheckBox1.TabIndex = 65
+        Me.CheckBox1.Text = "Tool tip Help Enable"
+        Me.CheckBox1.UseVisualStyleBackColor = True
+        '
+        'CheckBox2
+        '
+        Me.CheckBox2.AutoSize = True
+        Me.CheckBox2.Checked = True
+        Me.CheckBox2.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CheckBox2.Location = New System.Drawing.Point(697, 484)
+        Me.CheckBox2.Name = "CheckBox2"
+        Me.CheckBox2.Size = New System.Drawing.Size(122, 17)
+        Me.CheckBox2.TabIndex = 67
+        Me.CheckBox2.Text = "Tool tip Help Enable"
+        Me.CheckBox2.UseVisualStyleBackColor = True
+        '
         'FormDirect
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(828, 561)
+        Me.ClientSize = New System.Drawing.Size(828, 576)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.Func_tab)
         Me.Controls.Add(Me.MenuStrip)
@@ -1764,7 +1778,6 @@ Partial Class FormDirect
         Me.TXYFAF.ResumeLayout(False)
         Me.TXYFAF.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1923,10 +1936,11 @@ Partial Class FormDirect
     Friend WithEvents CBYmaxFAF As Windows.Forms.ComboBox
     Friend WithEvents CBYminFAF As Windows.Forms.ComboBox
     Friend WithEvents Label5 As Windows.Forms.Label
-    Friend WithEvents CheckBox1 As Windows.Forms.CheckBox
     Friend WithEvents Label7 As Windows.Forms.Label
     Friend WithEvents Label8 As Windows.Forms.Label
     Friend WithEvents CBBFreq As Windows.Forms.ComboBox
     Friend WithEvents CBBFStep As Windows.Forms.ComboBox
     Friend WithEvents BSetCorr As Windows.Forms.Button
+    Friend WithEvents CheckBox1 As Windows.Forms.CheckBox
+    Friend WithEvents CheckBox2 As Windows.Forms.CheckBox
 End Class
