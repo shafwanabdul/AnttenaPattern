@@ -674,9 +674,6 @@ Public Class FormDirect
         End If
     End Sub
 
-
-
-
     Private Sub CBmaxYax_SelectedIndexChanged_1(sender As Object, e As EventArgs) Handles CBmaxYax.SelectedIndexChanged
         If Me.CBmaxYax.SelectedIndex < 0 Then Me.CBmaxYax.SelectedIndex = 0
         If Me.CBminYax.SelectedIndex < 0 Then Me.CBminYax.SelectedIndex = 20
@@ -754,45 +751,33 @@ Public Class FormDirect
         AutoscalePolar(1)
     End Sub
 
-
-
-
-
     Private Sub PlotFAF(ByVal selectedFreq() As Double, ByVal DUTAF() As Double)
-        ' Create an array for the X-axis
         Dim x(selectedFreq.Length - 1) As Double
         For i As Integer = 0 To selectedFreq.Length - 1
             x(i) = selectedFreq(i)
         Next
 
-        ' Set graph properties
         ZedFAF.IsShowPointValues = True
         ZedFAF.GraphPane.CurveList.Clear()
 
-        ' Add a curve for antenna factors to the graph
         Dim curveDUTAF As LineItem = ZedFAF.GraphPane.AddCurve("Antenna Factor Vs Frequency", x, DUTAF, Color.DarkRed, SymbolType.Circle)
-        curveDUTAF.Line.IsVisible = True ' Show the curve line
-        curveDUTAF.Symbol.Fill = New Fill(Color.DarkRed) ' Fill the symbol with the same color
+        curveDUTAF.Line.IsVisible = True
+        curveDUTAF.Symbol.Fill = New Fill(Color.DarkRed)
 
-        ' Set graph titles and scales
         ZedFAF.GraphPane.IsShowTitle = False
         ZedFAF.GraphPane.XAxis.Title = "Frequency (MHz)"
         ZedFAF.GraphPane.YAxis.Title = "Antenna Factor (dBi)"
 
-        ' Calculate Y axis range
         Dim yMin As Double = DUTAF.Min()
         Dim yMax As Double = DUTAF.Max()
-        Dim yMargin As Double = (yMax - yMin) * 5 ' 10% margin for better visualization
+        Dim yMargin As Double = (yMax - yMin) * 5
 
         ZedFAF.GraphPane.YAxis.Min = yMin - yMargin
         ZedFAF.GraphPane.YAxis.Max = yMax + yMargin
 
-
-        ' Update and redraw the graph
         ZedFAF.AxisChange()
         ZedFAF.Invalidate()
     End Sub
-
 
     Private Sub LoadDemoDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LoadDemoDataToolStripMenuItem.Click
         dataap = {-3.3535, -3.27616, -3.37732, -3.37323, -3.53678, -3.69445, -3.79741, -3.9572, -4.18314, -4.28075, -4.50665, -4.64665, -4.82482, -5.17553, -5.41335, -5.68885, -6.10886, -6.73604, -7.18874, -7.61829, -7.89082, -8.68102, -8.75335, -9.25667, -9.68566, -10.0798, -10.64479, -10.90118, -11.08116, -11.33626, -11.38239, -11.826, -11.74857, -12.35004, -12.56384, -13.507, -14.13833, -15.19466, -16.40546, -17.60912, -19.1157, -20.56914, -21.16259, -20.60994, -18.47469, -17.09308, -15.66461, -14.83924, -14.36362, -13.75676, -14.0952, -13.73652, -13.97831, -14.0952, -13.5961, -13.5366, -13.19349, -12.13577, -10.76306, -9.68936, -8.21893, -7.07529, -6.08405, -5.18686, -4.68937, -4.48251, -4.22081, -4.37545, -4.58003, -5.0336, -5.45807, -6.17177, -7.06708, -7.82999, -8.70931, -9.33044, -10.176, -10.64598, -11.41587, -11.40427, -12.12457, -11.77811, -11.97813, -11.63802, -11.36378, -10.51124, -10.04997, -9.1447, -8.70412, -8.01291, -7.47042, -7.04208, -6.58641, -6.30541, -6.21881, -6.10606, -6.06381, -6.16437, -6.13938, -6.26823, -6.19366, -6.25613, -6.35173, -6.41607, -6.56645, -6.9417, -7.39903, -7.96899, -8.59808, -9.01261, -9.29196, -9.79149, -10.16316, -11.02672, -12.20826, -13.09432, -15.20163, -16.70384, -18.05604, -18.35198, -19.00063, -17.15031, -15.90136, -14.82682, -13.47343, -12.58743, -11.48257, -10.93285, -10.26087, -9.89429, -9.75305, -9.54255, -9.16409, -9.33501, -9.33501, -9.33469, -9.7815, -10.03703, -10.29005, -10.87091, -11.35976, -11.94846, -13.03088, -14.14435, -15.35937, -16.01626, -18.23917, -19.23685, -20.58855, -20.78451, -19.52708, -17.74191, -16.96425, -15.61829, -14.83376, -13.52381, -12.6484, -11.69049, -10.95347, -9.97587, -9.36739, -8.90343, -8.56087, -8.27094, -8.25156, -8.34888, -8.59827, -8.68633, -8.97799, -9.18253, -9.74294, -10.08082, -10.35863, -11.35397, -12.69409, -13.64191, -14.95465, -16.44373, -18.31628, -21.5344, -24.37138, -34.89447, -35.37163, -26.37389, -23.60817, -19.80688, -16.99992, -15.16263, -14.32726, -13.02853, -11.73878, -10.75003, -9.6198, -8.96918, -8.45792, -7.87106, -7.61211, -7.32741, -7.38262, -7.0588, -6.82228, -6.92948, -7.342, -7.50321, -7.64899, -8.072, -8.12019, -8.54317, -8.98975, -9.55157, -9.6626, -10.05197, -10.6664, -11.3604, -11.54392, -12.53194, -12.46367, -12.77176, -12.92152, -12.81506, -12.85397, -12.7854, -12.5696, -12.20792, -11.90173, -11.74416, -11.16935, -11.37329, -11.05421, -11.0997, -10.99844, -10.8272, -11.37265, -11.48035, -11.9657, -12.45345, -12.86391, -13.3165, -14.12396, -14.60249, -14.78968, -15.97343, -16.73888, -17.29578, -18.48573, -20.18982, -20.83994, -20.61094, -20.8457, -20.32432, -19.36375, -19.10863, -18.3407, -17.3997, -16.87266, -15.83006, -15.15965, -13.84524, -12.98184, -12.04964, -10.95592, -10.10809, -9.01232, -8.20217, -7.56331, -6.97678, -6.72771, -6.12437, -6.12683, -6.09622, -6.21327, -6.30058, -6.69302, -7.10839, -7.78146, -8.60203, -9.05122, -9.73652, -10.49569, -11.18069, -11.63382, -12.23138, -12.28422, -12.53783, -12.01624, -11.74551, -11.46339, -10.54948, -9.66577, -8.93454, -8.11665, -7.6616, -7.14874, -6.59092, -6.34239, -6.35506, -6.11803, -6.03008, -6.09447, -6.07132, -5.97865, -6.12225, -6.0172, -6.04963, -6.22646, -6.32146, -6.32111, -6.49367, -6.25861, -6.32038, -6.09692, -5.77454, -5.43108, -4.94147, -4.63629, -4.32083, -4.05689, -3.89508, -3.72474, -3.64358, -3.58762, -3.46767, -3.53776, -3.41488, -3.44304, -3.49105, -3.62744, -3.53279, -3.5863, -3.63564, -3.50017, -3.35677, -3.27973, -3.15141, -2.93442, -2.70225, -2.48795, -2.27632, -2.17598, -1.93488, -1.85821, -1.84528, -1.86878, -1.93097, -2.04258, -2.12513, -2.35496, -2.46757, -2.69038, -2.93735, -3.00327, -3.04644, -3.25589, -3.16318, -3.17672, -3.06054, -3.0598, -3.13941, -2.98509, -3.00721}
@@ -813,29 +798,39 @@ Public Class FormDirect
         AutoscalePolar(1)
     End Sub
 
-
-
     Private Sub BAddToListAPList_Click(sender As Object, e As EventArgs) Handles BAddToListAPList.Click
-        ' Validasi jarak pengukuran
         If Val(TBMeasDistance.Text) <= 0 Then
             MsgBox("Input DUT Antenna to Reference Antenna Distance")
             Return
         End If
 
-        ' Validasi koneksi TCP
         'If Not TCPconnected Then
         '    MsgBox("TCP connection is not established.")
         '    Return
         'End If
 
-        ' Adjust the loop to use stepFreq for iteration
         Dim startFreq As Double = CDbl(Val(TBFStart.Text)) * 1000000 ' Convert to Hz
         Dim stopFreq As Double = CDbl(Val(TBFStop.Text)) * 1000000 ' Convert to Hz
-
-        ' Get the step frequency
         Dim stepFreq As Double = GetStepFrequency()
 
-        ' Menghitung nilai TBPowerdBm dari TCP
+        Dim freqList As New List(Of Double)
+        Dim dutAFList As New List(Of Double)
+
+        Dim selectedFreq As Double = startFreq
+        Do While selectedFreq <= stopFreq
+            UpdateCalculatedValues(selectedFreq)
+
+            freqList.Add(selectedFreq / 1000000) ' Convert to MHz
+            dutAFList.Add(CDbl(TBDUTAF.Text))
+
+            AddToList(selectedFreq)
+            selectedFreq += stepFreq
+        Loop
+
+        PlotFAF(freqList.ToArray(), dutAFList.ToArray())
+    End Sub
+
+    Private Sub UpdateCalculatedValues(selectedFreq As Double)
         Dim TBPowerdBmValue As Double = 0.0
         If TCPconnected Then
             TBPowerdBm.Text = CStr(Val(SendTCP(":TRACe:DATA? TRACE1")(150)))
@@ -843,99 +838,57 @@ Public Class FormDirect
             TBPowerdBmValue = CDbl(TBPowerdBm.Text)
         End If
 
-        ' Initialize lists to accumulate the frequency, DUT AF, and DUT AG values
-        Dim freqList As New List(Of Double)
-        Dim dutAFList As New List(Of Double)
-        Dim dutAGList As New List(Of Double)
-
-        ' Iterate over the frequency range and update the list
-        Dim selectedFreq As Double = startFreq
-        Do While selectedFreq <= stopFreq
-            UpdateCalculatedValues(selectedFreq)
-
-            ' Add values to the lists
-            freqList.Add(selectedFreq / 1000000) ' Convert to MHz for plotting
-            dutAFList.Add(CDbl(TBDUTAF.Text))
-
-            AddToList(selectedFreq)
-            selectedFreq += stepFreq
-        Loop
-
-        ' Call PlotFAF with the accumulated values
-        PlotFAF(freqList.ToArray(), dutAFList.ToArray())
-    End Sub
-
-
-
-    Private Sub UpdateCalculatedValues(selectedFreq As Double)
-        ' Calculate FSL using the correct formula
+        ' Calculate FSL
         Dim distance As Double = Val(TBMeasDistance.Text)
         Dim FSL As Double = 20 * Math.Log10(distance) + 20 * Math.Log10(selectedFreq) - 147.55
         TBFSL.Text = FormatNumber(FSL, 1, TriState.False, , TriState.True)
 
         ' Calculate EIRP
-        Dim TBPowerdBmValue As Double = Val(TBPowerdBm.Text)
+        TBPowerdBmValue = Val(TBPowerdBm.Text)
         Dim EIRP As Double = TBPowerdBmValue - Val(TBCorFac.Text) + FSL
         TBEIRPow.Text = FormatNumber(EIRP, 1, TriState.False, , TriState.True)
 
-        ' Calculate DUT AG based on the frequency
+        ' Calculate DUT AG
         Dim DUTAG As Double = Val(TBEIRPow.Text) - Val(CBTGLvl.SelectedItem)
         TBDUTAG.Text = FormatNumber(DUTAG, 1, TriState.False, , TriState.True)
 
         ' Calculate DUT AF
         Dim DUTAF As Double = (20 * Math.Log10(selectedFreq / 1000)) - DUTAG - 29.7707
         TBDUTAF.Text = FormatNumber(DUTAF, 1, TriState.False, , TriState.True)
-
-
     End Sub
 
     Private Sub AddToList(selectedFreq As Double)
-        ' Check if the list is empty, if so, add an empty line
         If TBAFList.Text = "" Then
             TBAFList.AppendText(Environment.NewLine)
         End If
 
-        ' Format the entry as comma-separated values
-        Dim entry As String = $"{selectedFreq / 1000000} MHz, {TBDUTAF.Text}, {TBDUTAG.Text}"
+        Dim entry As String = $"{selectedFreq / 1000000}, {TBDUTAF.Text}, {TBDUTAG.Text}"
         TBAFList.AppendText(entry & Environment.NewLine)
     End Sub
 
     Private Sub TBMeasDistance_Validated(sender As Object, e As EventArgs) Handles TBMeasDistance.Validated
-        ' Ensure startFreq and stopFreq are filled in correctly
         If TBFStart.Text = "" Or TBFStop.Text = "" Then
             MsgBox("Please enter valid start and stop frequencies.")
             Return
         End If
 
-        ' Get the start and stop frequencies
-        Dim startFreq As Double = CDbl(Val(TBFStart.Text)) * 1000000 ' Convert MHz to Hz
-        Dim stopFreq As Double = CDbl(Val(TBFStop.Text)) * 1000000 ' Convert MHz to Hz
-
-        ' Get the step frequency
+        Dim startFreq As Double = CDbl(Val(TBFStart.Text)) * 1000000
+        Dim stopFreq As Double = CDbl(Val(TBFStop.Text)) * 1000000
         Dim stepFreq As Double = GetStepFrequency()
 
-        ' Add header to TBAFList with the correct format
-        TBAFList.Text = String.Format("{0,-20}{1,-30}{2,-30}" & vbCrLf, "Frequency", "AntennaFactor(dB/m)", "AntennaGain(dBi)")
+        TBAFList.Text = String.Format("{0,-20}{1,-30}{2,-30}" & vbCrLf, "Frequency(MHz)", "AntennaFactor(dB/m)", "AntennaGain(dBi)")
 
-        ' Clear the ComboBox before adding new frequencies
         CBBFreq.Items.Clear()
 
-        ' Iterate through each frequency step
         Dim selectedFreq As Double = startFreq
         While selectedFreq <= stopFreq
 
-            ' Add the frequency to the ComboBox in MHz
             Dim freqInMHz As Double = selectedFreq / 1000000
             CBBFreq.Items.Add(freqInMHz)
 
-            ' Increment the frequency
             selectedFreq += stepFreq
         End While
-
     End Sub
-
-
-
     Private Sub TBAF_Validated(sender As Object, e As EventArgs) Handles TBAF.Validated
         TBAntCorr.Text = CStr((20 * Log10(currentFreq / 1000)) - Val(TBAF.Text) - 29.7707)
         TBAntCorr.Text = FormatNumber(TBAntCorr.Text, 1, TriState.False, , TriState.True)
@@ -1164,91 +1117,68 @@ Public Class FormDirect
     Private Sub BNormalize_Click(sender As Object, e As EventArgs)
 
     End Sub
-
     Private Sub BSetSPACtrl_Click_1(sender As Object, e As EventArgs) Handles BSetSPACtrl.Click
         Dim sendtcpdata As String
         Dim RbwScale As Integer
         If TCPconnected = True Then
-            ' Logging
             Console.WriteLine("TCP connected. Sending commands...")
 
-            ' Set Stop Frequency
+            Dim startFreq As Single = CSng(Val(TBFStart.Text)) * 1000000 ' Using MHz
             Dim stopFreq As Single = CSng(Val(TBFStop.Text)) * 1000000 ' Using MHz
-
-            ' Set Step Frequency
             Dim stepFreq As Single = GetStepFrequency()
 
-            ' Initial Settings (Sent only once)
-            ' Set Stop Frequency (fixed for the session)
+            sendtcpdata = ":SENSe:FREQuency:STARt " & startFreq
+            Console.WriteLine("Sending command: " & sendtcpdata)
+            SendcommandTCP(sendtcpdata)
+
             sendtcpdata = ":SENSe:FREQuency:STOP " & stopFreq
-            Console.WriteLine("Sending command: " & sendtcpdata) ' Logging
+            Console.WriteLine("Sending command: " & sendtcpdata)
             SendcommandTCP(sendtcpdata)
 
-            ' Set Display Scale
             sendtcpdata = ":DISPlay:WINdow:TRACe:Y:SCALe:RLEVel " & Val(CBRL.SelectedItem)
-            Console.WriteLine("Sending command: " & sendtcpdata) ' Logging
+            Console.WriteLine("Sending command: " & sendtcpdata)
             SendcommandTCP(sendtcpdata)
 
-            ' Set RBW
             RbwScale = 1
             If CBRBW.SelectedItem.ToString.EndsWith(" MHz") Then RbwScale = 1000000
             If CBRBW.SelectedItem.ToString.EndsWith(" kHz") Then RbwScale = 1000
             If CBRBW.SelectedItem.ToString.EndsWith(" Hz") Then RbwScale = 1
             FRbw = CInt(Val(CBRBW.SelectedItem)) * RbwScale
             sendtcpdata = ":SENSe:BANDwidth:RESolution " & Val(FRbw)
-            Console.WriteLine("Sending command: " & sendtcpdata) ' Logging
+            Console.WriteLine("Sending command: " & sendtcpdata)
             SendcommandTCP(sendtcpdata)
 
-            ' Set Attenuation
             sendtcpdata = ":SENSe:POWer:RF:ATTenuation " & Val(CBAttenuatorInt.SelectedItem)
-            Console.WriteLine("Sending command: " & sendtcpdata) ' Logging
+            Console.WriteLine("Sending command: " & sendtcpdata)
             SendcommandTCP(sendtcpdata)
 
-            ' Set Output Power Level
             sendtcpdata = ":SOURce:POWer:LEVel:IMMediate:AMPLitude " & Val(CBTGLvl.SelectedItem)
-            Console.WriteLine("Sending command: " & sendtcpdata) ' Logging
+            Console.WriteLine("Sending command: " & sendtcpdata)
             SendcommandTCP(sendtcpdata)
 
-            ' Set TG State
             If CBTG.Checked = False Then
                 sendtcpdata = ":OUTPut:STATe 0"
-                Console.WriteLine("Sending command: " & sendtcpdata) ' Logging
+                Console.WriteLine("Sending command: " & sendtcpdata)
                 SendcommandTCP(sendtcpdata)
             ElseIf CBTG.Checked = True Then
                 sendtcpdata = ":OUTPut:STATe 1"
-                Console.WriteLine("Sending command: " & sendtcpdata) ' Logging
+                Console.WriteLine("Sending command: " & sendtcpdata)
                 SendcommandTCP(sendtcpdata)
             End If
 
-            ' Set Continuous Initiate
             sendtcpdata = ":INITiate:CONTinuous ON"
-            Console.WriteLine("Sending command: " & sendtcpdata) ' Logging
+            Console.WriteLine("Sending command: " & sendtcpdata)
             SendcommandTCP(sendtcpdata)
-
-            ' Loop to increment start frequency by step until stop frequency
-            Dim startFreq As Single = CSng(Val(TBFStart.Text)) * 1000000 ' Using MHz
-            While startFreq <= stopFreq
-                ' Send Start Frequency command
-                sendtcpdata = ":SENSe:FREQuency:STARt " & startFreq
-                Console.WriteLine("Sending command: " & sendtcpdata) ' Logging
-                SendcommandTCP(sendtcpdata)
-
-                ' Increment start frequency by step frequency
-                startFreq += stepFreq
-            End While
-
         Else
-            Console.WriteLine("TCP not connected.") ' Logging
+            Console.WriteLine("TCP not connected.")
         End If
     End Sub
-
-
 
     Private Sub Label3_Click(sender As Object, e As EventArgs) Handles Label3.Click
 
     End Sub
 
-    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TBFStop.TextChanged
+    Private Sub TBFStop_TextChanged(sender As Object, e As EventArgs) Handles TBFStop.TextChanged
 
     End Sub
 
@@ -1284,7 +1214,7 @@ Public Class FormDirect
 
     End Sub
 
-    Private Sub CBTTH_CheckedChanged(sender As Object, e As EventArgs) Handles CBTTH.CheckedChanged
+    Private Sub CBTTH_CheckedChanged(sender As Object, e As EventArgs)
 
     End Sub
 
@@ -1378,24 +1308,21 @@ Public Class FormDirect
     End Sub
 
     Private Function GetStepFrequency() As Double
-        ' Assuming the step frequency is in KHz or MHz
         Dim stepFrequency As Double = 0.0
         Dim stepText As String = CBBFStep.SelectedItem.ToString()
 
         If stepText.EndsWith(" KHz") Then
             Dim value As String = stepText.Replace(" KHz", "")
             If Double.TryParse(value, stepFrequency) Then
-                stepFrequency *= 1000 ' Convert KHz to Hz
+                stepFrequency *= 1000
             Else
-                ' Handle parsing error
                 MessageBox.Show("Invalid frequency value")
             End If
         ElseIf stepText.EndsWith(" MHz") Then
             Dim value As String = stepText.Replace(" MHz", "")
             If Double.TryParse(value, stepFrequency) Then
-                stepFrequency *= 1000000 ' Convert MHz to Hz
+                stepFrequency *= 1000000
             Else
-                ' Handle parsing error
                 MessageBox.Show("Invalid frequency value")
             End If
         End If
@@ -1404,20 +1331,18 @@ Public Class FormDirect
     End Function
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ' Tambahkan nilai langkah ke ComboBox
         For i As Integer = 10 To 100 Step 10
             CBBFStep.Items.Add(i & " KHz")
             CBBFStep.Items.Add(i & " MHz")
         Next
 
-        ' Set default selection to avoid crashes
         If CBBFStep.Items.Count > 0 Then
             CBBFStep.SelectedIndex = 0
         End If
     End Sub
 
     Private Sub CBBFStep_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CBBFStep.SelectedIndexChanged
-        ' You can handle selection changes here if needed
+
     End Sub
 
     Private Sub StatusStrip1_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles StatusStrip1.ItemClicked
@@ -1425,14 +1350,11 @@ Public Class FormDirect
     End Sub
 
     Private Sub CBBFreq_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CBBFreq.SelectedIndexChanged
-        ' Get the selected frequency in MHz and convert it to Hz
         Dim selectedFreqMHz As Double = CDbl(CBBFreq.SelectedItem)
         Dim selectedFreqHz As Double = selectedFreqMHz * 1000000
 
-        ' Calculate and display the values using the frequency in Hz
         UpdateCalculatedValues(selectedFreqHz)
     End Sub
-
 
     Private Sub BAntPattern_Click_1(sender As Object, e As EventArgs) Handles BAntPattern.Click
         If LAngle.Text = "0" Then

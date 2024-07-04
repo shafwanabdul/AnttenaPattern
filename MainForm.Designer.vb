@@ -136,10 +136,10 @@ Partial Class FormDirect
         Me.CBminYax = New System.Windows.Forms.ComboBox()
         Me.LYmax = New System.Windows.Forms.Label()
         Me.GBBarChartLvlDF = New System.Windows.Forms.GroupBox()
-        Me.CBTTH = New System.Windows.Forms.CheckBox()
         Me.ZedGraphAP = New ZedGraph.ZedGraphControl()
         Me.Func_tab = New System.Windows.Forms.TabControl()
         Me.Setting = New System.Windows.Forms.TabPage()
+        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.BStopAP = New System.Windows.Forms.Button()
         Me.BAntPattern = New System.Windows.Forms.Button()
@@ -186,8 +186,9 @@ Partial Class FormDirect
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.ZedFAF = New ZedGraph.ZedGraphControl()
         Me.SerialPort = New System.IO.Ports.SerialPort(Me.components)
+        Me.CBTTH = New System.Windows.Forms.CheckBox()
+        Me.CheckBox3 = New System.Windows.Forms.CheckBox()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
         Me.StatusStrip1.SuspendLayout()
         Me.MenuStrip.SuspendLayout()
         Me.GBSpecControl.SuspendLayout()
@@ -605,7 +606,7 @@ Partial Class FormDirect
         Me.TBFStart.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.TBFStart.Size = New System.Drawing.Size(87, 20)
         Me.TBFStart.TabIndex = 58
-        Me.TBFStart.Text = "1,000,000.00"
+        Me.TBFStart.Text = "10"
         Me.TBFStart.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label4
@@ -624,7 +625,7 @@ Partial Class FormDirect
         Me.TBFStop.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.TBFStop.Size = New System.Drawing.Size(87, 20)
         Me.TBFStop.TabIndex = 56
-        Me.TBFStop.Text = "1,000,000.00"
+        Me.TBFStop.Text = "100000"
         Me.TBFStop.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label3
@@ -869,7 +870,7 @@ Partial Class FormDirect
         Me.TextIP.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.TextIP.Size = New System.Drawing.Size(90, 20)
         Me.TextIP.TabIndex = 4
-        Me.TextIP.Text = "192.168.1.25"
+        Me.TextIP.Text = "192.168.1.4"
         '
         'LIP
         '
@@ -1008,12 +1009,13 @@ Partial Class FormDirect
         '
         'TAPolar
         '
+        Me.TAPolar.Controls.Add(Me.CheckBox3)
         Me.TAPolar.Controls.Add(Me.GBLog)
         Me.TAPolar.Controls.Add(Me.GBAPPolar)
         Me.TAPolar.Location = New System.Drawing.Point(4, 22)
         Me.TAPolar.Name = "TAPolar"
         Me.TAPolar.Padding = New System.Windows.Forms.Padding(3)
-        Me.TAPolar.Size = New System.Drawing.Size(932, 586)
+        Me.TAPolar.Size = New System.Drawing.Size(932, 601)
         Me.TAPolar.TabIndex = 1
         Me.TAPolar.Text = "Antenna Pattern (Polar)"
         Me.TAPolar.UseVisualStyleBackColor = True
@@ -1125,6 +1127,7 @@ Partial Class FormDirect
         '
         'TXYAP
         '
+        Me.TXYAP.Controls.Add(Me.CBTTH)
         Me.TXYAP.Controls.Add(Me.CBmaxYax)
         Me.TXYAP.Controls.Add(Me.LYmin)
         Me.TXYAP.Controls.Add(Me.CBminYax)
@@ -1133,7 +1136,7 @@ Partial Class FormDirect
         Me.TXYAP.Location = New System.Drawing.Point(4, 22)
         Me.TXYAP.Name = "TXYAP"
         Me.TXYAP.Padding = New System.Windows.Forms.Padding(3)
-        Me.TXYAP.Size = New System.Drawing.Size(932, 586)
+        Me.TXYAP.Size = New System.Drawing.Size(932, 601)
         Me.TXYAP.TabIndex = 0
         Me.TXYAP.Text = "Power Vs Angle (XY chart)"
         Me.TXYAP.UseVisualStyleBackColor = True
@@ -1183,7 +1186,6 @@ Partial Class FormDirect
         Me.GBBarChartLvlDF.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GBBarChartLvlDF.Controls.Add(Me.CBTTH)
         Me.GBBarChartLvlDF.Controls.Add(Me.ZedGraphAP)
         Me.GBBarChartLvlDF.Location = New System.Drawing.Point(9, 22)
         Me.GBBarChartLvlDF.Name = "GBBarChartLvlDF"
@@ -1191,18 +1193,6 @@ Partial Class FormDirect
         Me.GBBarChartLvlDF.TabIndex = 14
         Me.GBBarChartLvlDF.TabStop = False
         Me.GBBarChartLvlDF.Text = "AP Caertesian Plot"
-        '
-        'CBTTH
-        '
-        Me.CBTTH.AutoSize = True
-        Me.CBTTH.Checked = True
-        Me.CBTTH.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CBTTH.Location = New System.Drawing.Point(692, 418)
-        Me.CBTTH.Name = "CBTTH"
-        Me.CBTTH.Size = New System.Drawing.Size(122, 17)
-        Me.CBTTH.TabIndex = 62
-        Me.CBTTH.Text = "Tool tip Help Enable"
-        Me.CBTTH.UseVisualStyleBackColor = True
         '
         'ZedGraphAP
         '
@@ -1252,6 +1242,18 @@ Partial Class FormDirect
         Me.Setting.TabIndex = 4
         Me.Setting.Text = "Setting"
         Me.Setting.UseVisualStyleBackColor = True
+        '
+        'CheckBox2
+        '
+        Me.CheckBox2.AutoSize = True
+        Me.CheckBox2.Checked = True
+        Me.CheckBox2.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CheckBox2.Location = New System.Drawing.Point(697, 484)
+        Me.CheckBox2.Name = "CheckBox2"
+        Me.CheckBox2.Size = New System.Drawing.Size(122, 17)
+        Me.CheckBox2.TabIndex = 67
+        Me.CheckBox2.Text = "Tool tip Help Enable"
+        Me.CheckBox2.UseVisualStyleBackColor = True
         '
         'Label2
         '
@@ -1398,7 +1400,7 @@ Partial Class FormDirect
         Me.TBAFList.Name = "TBAFList"
         Me.TBAFList.Size = New System.Drawing.Size(346, 123)
         Me.TBAFList.TabIndex = 48
-        Me.TBAFList.Text = "Frequency,(Hz) ),Antenna Factor(dB/m),Antenna Gain(dBi)"
+        Me.TBAFList.Text = "Frequency(Hz), Antenna Factor(dB/m), Antenna Gain(dBi)"
         '
         'BClearAFlist
         '
@@ -1628,7 +1630,7 @@ Partial Class FormDirect
         Me.TXYFAF.Margin = New System.Windows.Forms.Padding(2)
         Me.TXYFAF.Name = "TXYFAF"
         Me.TXYFAF.Padding = New System.Windows.Forms.Padding(2)
-        Me.TXYFAF.Size = New System.Drawing.Size(932, 586)
+        Me.TXYFAF.Size = New System.Drawing.Size(932, 601)
         Me.TXYFAF.TabIndex = 5
         Me.TXYFAF.Text = "Antenna Factor Vs Frequency (XY chart)"
         Me.TXYFAF.UseVisualStyleBackColor = True
@@ -1684,7 +1686,7 @@ Partial Class FormDirect
         Me.GroupBox2.Size = New System.Drawing.Size(732, 545)
         Me.GroupBox2.TabIndex = 15
         Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "AP Caertesian Plot"
+        Me.GroupBox2.Text = "AF Caertesian Plot"
         '
         'ZedFAF
         '
@@ -1704,29 +1706,41 @@ Partial Class FormDirect
         'SerialPort
         '
         '
+        'CBTTH
+        '
+        Me.CBTTH.AutoSize = True
+        Me.CBTTH.Checked = True
+        Me.CBTTH.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CBTTH.Location = New System.Drawing.Point(702, 484)
+        Me.CBTTH.Name = "CBTTH"
+        Me.CBTTH.Size = New System.Drawing.Size(122, 17)
+        Me.CBTTH.TabIndex = 64
+        Me.CBTTH.Text = "Tool tip Help Enable"
+        Me.CBTTH.UseVisualStyleBackColor = True
+        '
+        'CheckBox3
+        '
+        Me.CheckBox3.AutoSize = True
+        Me.CheckBox3.Checked = True
+        Me.CheckBox3.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CheckBox3.Location = New System.Drawing.Point(702, 484)
+        Me.CheckBox3.Name = "CheckBox3"
+        Me.CheckBox3.Size = New System.Drawing.Size(122, 17)
+        Me.CheckBox3.TabIndex = 64
+        Me.CheckBox3.Text = "Tool tip Help Enable"
+        Me.CheckBox3.UseVisualStyleBackColor = True
+        '
         'CheckBox1
         '
         Me.CheckBox1.AutoSize = True
         Me.CheckBox1.Checked = True
         Me.CheckBox1.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CheckBox1.Location = New System.Drawing.Point(702, 469)
+        Me.CheckBox1.Location = New System.Drawing.Point(702, 484)
         Me.CheckBox1.Name = "CheckBox1"
         Me.CheckBox1.Size = New System.Drawing.Size(122, 17)
-        Me.CheckBox1.TabIndex = 65
+        Me.CheckBox1.TabIndex = 66
         Me.CheckBox1.Text = "Tool tip Help Enable"
         Me.CheckBox1.UseVisualStyleBackColor = True
-        '
-        'CheckBox2
-        '
-        Me.CheckBox2.AutoSize = True
-        Me.CheckBox2.Checked = True
-        Me.CheckBox2.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CheckBox2.Location = New System.Drawing.Point(697, 484)
-        Me.CheckBox2.Name = "CheckBox2"
-        Me.CheckBox2.Size = New System.Drawing.Size(122, 17)
-        Me.CheckBox2.TabIndex = 67
-        Me.CheckBox2.Text = "Tool tip Help Enable"
-        Me.CheckBox2.UseVisualStyleBackColor = True
         '
         'FormDirect
         '
@@ -1758,6 +1772,7 @@ Partial Class FormDirect
         Me.GBComm.ResumeLayout(False)
         Me.GBComm.PerformLayout()
         Me.TAPolar.ResumeLayout(False)
+        Me.TAPolar.PerformLayout()
         Me.GBLog.ResumeLayout(False)
         Me.GBLog.PerformLayout()
         Me.GBAPPolar.ResumeLayout(False)
@@ -1765,7 +1780,6 @@ Partial Class FormDirect
         Me.TXYAP.ResumeLayout(False)
         Me.TXYAP.PerformLayout()
         Me.GBBarChartLvlDF.ResumeLayout(False)
-        Me.GBBarChartLvlDF.PerformLayout()
         Me.Func_tab.ResumeLayout(False)
         Me.Setting.ResumeLayout(False)
         Me.Setting.PerformLayout()
@@ -1918,7 +1932,6 @@ Partial Class FormDirect
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents BStopAP As System.Windows.Forms.Button
     Friend WithEvents BAntPattern As System.Windows.Forms.Button
-    Friend WithEvents CBTTH As System.Windows.Forms.CheckBox
     Protected Friend WithEvents BReleaseMotor As System.Windows.Forms.Button
     Friend WithEvents TSSLSeparator As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents TBFStop As Windows.Forms.TextBox
@@ -1941,6 +1954,8 @@ Partial Class FormDirect
     Friend WithEvents CBBFreq As Windows.Forms.ComboBox
     Friend WithEvents CBBFStep As Windows.Forms.ComboBox
     Friend WithEvents BSetCorr As Windows.Forms.Button
-    Friend WithEvents CheckBox1 As Windows.Forms.CheckBox
     Friend WithEvents CheckBox2 As Windows.Forms.CheckBox
+    Friend WithEvents CheckBox3 As Windows.Forms.CheckBox
+    Friend WithEvents CBTTH As Windows.Forms.CheckBox
+    Friend WithEvents CheckBox1 As Windows.Forms.CheckBox
 End Class
