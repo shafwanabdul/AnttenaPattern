@@ -228,61 +228,6 @@ Public Class FormDirect
         Return 0
     End Function
 
-
-    'Graph Antena Factor Vs Freq
-
-    Private Function PlotFAF(ByVal XYval() As String)
-        Dim x(362) As Double
-        Dim i As Integer
-        ZedFAF.IsShowPointValues = True
-        If XYval IsNot Nothing Then
-            For i = 0 To 360
-                x(i) = i
-            Next
-            APGain(APangle) = CDbl(Val(XYval(150)))
-        End If
-        Dim myPane As GraphPane = ZedFAF.GraphPane
-        myPane.CurveList.Clear()
-        ZedFAF.GraphPane.AddCurve("Power VS Angle", x, APGain, Color.DarkGreen, ZedGraph.SymbolType.VDash)
-        ZedFAF.Invalidate()
-        ZedFAF.GraphPane.IsShowTitle = False
-        ZedFAF.GraphPane.XAxis.Title = "Frequency"
-        ZedFAF.GraphPane.YAxis.Title = "Antenna Factor"
-        ZedFAF.GraphPane.YAxis.Max = Yaxmax
-        ZedFAF.GraphPane.YAxis.Min = Yaxmin
-        ZedFAF.GraphPane.XAxis.ScaleMag = 0
-        ZedFAF.AxisChange()
-        ZedFAF.GraphPane.XAxis.Max = 360
-        Return 0
-    End Function
-
-    Private Function PlotFAFReal(ByVal XYval() As Double)
-        Dim x(362) As Double
-        Dim i As Integer
-        ZedFAF.IsShowPointValues = True
-        If XYval IsNot Nothing Then
-            For i = 0 To 360
-                x(i) = i
-            Next
-            APGain(APangle) = CDbl(Val(XYval(150)))
-        End If
-        Dim myPane As GraphPane = ZedFAF.GraphPane
-        myPane.CurveList.Clear()
-        ZedFAF.GraphPane.AddCurve("Power VS Angle", x, APGain, Color.DarkGreen, ZedGraph.SymbolType.VDash)
-        ZedFAF.Invalidate()
-        ZedFAF.GraphPane.IsShowTitle = False
-        ZedFAF.GraphPane.XAxis.Title = "Frequency"
-        ZedFAF.GraphPane.YAxis.Title = "Antenna Factor"
-        ZedFAF.GraphPane.YAxis.Max = Yaxmax
-        ZedFAF.GraphPane.YAxis.Min = Yaxmin
-        ZedFAF.GraphPane.XAxis.ScaleMag = 0
-        ZedFAF.AxisChange()
-        ZedFAF.GraphPane.XAxis.Max = 360
-        Return 0
-    End Function
-
-    'End Antena Factor Vs Freq
-
     Private Sub TimerAntennaPattern_Tick(sender As Object, e As EventArgs) Handles TimerAntennaPattern.Tick
         Dim tempdata As String
         tempdata = SendTCP(":TRACe:DATA? TRACE1")(150)
@@ -818,7 +763,7 @@ Public Class FormDirect
 
         Dim selectedFreq As Double = startFreq
         Do While selectedFreq <= stopFreq
-            UpdateCalculatedValues(selectedFreq)
+            'UpdateCalculatedValues(selectedFreq)
 
             freqList.Add(selectedFreq / 1000000) ' Convert to MHz
             dutAFList.Add(CDbl(TBDUTAF.Text))
@@ -1261,31 +1206,7 @@ Public Class FormDirect
 
     Private Sub TXYAP_Click(sender As Object, e As EventArgs) Handles TXYAP.Click
 
-    End Sub
-
-    Private Sub CBYminFAF_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CBYminFAF.SelectedIndexChanged
-        If Me.CBYmaxFAF.SelectedIndex < 0 Then Me.CBYmaxFAF.SelectedIndex = 0
-        If Me.CBYminFAF.SelectedIndex < 0 Then Me.CBYminFAF.SelectedIndex = 20
-        If Val(Me.CBYmaxFAF.SelectedItem.ToString) < Val(Me.CBYminFAF.SelectedItem.ToString) Then Me.CBYminFAF.SelectedIndex = CInt(Val(Me.CBYmaxFAF.SelectedIndex))
-        Yaxmin = CSng(Val(Val(Me.CBYminFAF.SelectedItem.ToString)))
-        ZedFAF.GraphPane.YAxis.Max = Yaxmax
-        ZedFAF.GraphPane.YAxis.Min = Yaxmin
-        ZedFAF.GraphPane.YAxis.ScaleMagAuto = True
-        ZedFAF.Refresh()
-    End Sub
-
-    Private Sub CBYmaxFAF_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CBYmaxFAF.SelectedIndexChanged
-        If Me.CBYmaxFAF.SelectedIndex < 0 Then Me.CBYmaxFAF.SelectedIndex = 0
-        If Me.CBYminFAF.SelectedIndex < 0 Then Me.CBYminFAF.SelectedIndex = 20
-        If Val(Me.CBYmaxFAF.SelectedItem.ToString) < Val(Me.CBYminFAF.SelectedItem.ToString) Then Me.CBYmaxFAF.SelectedIndex = CInt(Val(Me.CBYminFAF.SelectedIndex))
-        Yaxmax = CSng(Val(Me.CBYmaxFAF.SelectedItem.ToString))
-        ZedFAF.GraphPane.YAxis.IsShowGrid = True
-        ZedFAF.GraphPane.XAxis.IsShowGrid = True
-        ZedFAF.GraphPane.YAxis.Max = Yaxmax
-        ZedFAF.GraphPane.YAxis.Min = Yaxmin
-        ZedFAF.GraphPane.YAxis.ScaleMagAuto = True
-        ZedFAF.Refresh()
-    End Sub
+    End Sub     
 
     Private Sub PlotAntennaGainPolar(ByVal degrees() As Double, ByVal antennaFactors() As Double)
 

@@ -121,6 +121,7 @@ Partial Class FormDirect
         Me.BSaveReport = New System.Windows.Forms.Button()
         Me.BRptClr = New System.Windows.Forms.Button()
         Me.TAPolar = New System.Windows.Forms.TabPage()
+        Me.CheckBox3 = New System.Windows.Forms.CheckBox()
         Me.GBLog = New System.Windows.Forms.GroupBox()
         Me.BAutoscalePol = New System.Windows.Forms.Button()
         Me.APTB = New System.Windows.Forms.TextBox()
@@ -131,6 +132,7 @@ Partial Class FormDirect
         Me.GBAPPolar = New System.Windows.Forms.GroupBox()
         Me.CHAPP = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.TXYAP = New System.Windows.Forms.TabPage()
+        Me.CBTTH = New System.Windows.Forms.CheckBox()
         Me.CBmaxYax = New System.Windows.Forms.ComboBox()
         Me.LYmin = New System.Windows.Forms.Label()
         Me.CBminYax = New System.Windows.Forms.ComboBox()
@@ -179,16 +181,14 @@ Partial Class FormDirect
         Me.LNoSeri = New System.Windows.Forms.Label()
         Me.TBNoSeri = New System.Windows.Forms.TextBox()
         Me.TXYFAF = New System.Windows.Forms.TabPage()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.CBYmaxFAF = New System.Windows.Forms.ComboBox()
-        Me.CBYminFAF = New System.Windows.Forms.ComboBox()
-        Me.Label5 = New System.Windows.Forms.Label()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.ZedFAF = New ZedGraph.ZedGraphControl()
         Me.SerialPort = New System.IO.Ports.SerialPort(Me.components)
-        Me.CBTTH = New System.Windows.Forms.CheckBox()
-        Me.CheckBox3 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.CBYmaxFAF = New System.Windows.Forms.ComboBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.CBYminFAF = New System.Windows.Forms.ComboBox()
+        Me.Label6 = New System.Windows.Forms.Label()
         Me.StatusStrip1.SuspendLayout()
         Me.MenuStrip.SuspendLayout()
         Me.GBSpecControl.SuspendLayout()
@@ -312,7 +312,7 @@ Partial Class FormDirect
         'LoadDemoDataToolStripMenuItem
         '
         Me.LoadDemoDataToolStripMenuItem.Name = "LoadDemoDataToolStripMenuItem"
-        Me.LoadDemoDataToolStripMenuItem.Size = New System.Drawing.Size(161, 22)
+        Me.LoadDemoDataToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.LoadDemoDataToolStripMenuItem.Text = "Load Demo data"
         '
         'TSMAbout
@@ -325,7 +325,7 @@ Partial Class FormDirect
         'AboutToolStripMenuItem3
         '
         Me.AboutToolStripMenuItem3.Name = "AboutToolStripMenuItem3"
-        Me.AboutToolStripMenuItem3.Size = New System.Drawing.Size(107, 22)
+        Me.AboutToolStripMenuItem3.Size = New System.Drawing.Size(180, 22)
         Me.AboutToolStripMenuItem3.Text = "About"
         '
         'FileToolStripMenuItem
@@ -1020,6 +1020,18 @@ Partial Class FormDirect
         Me.TAPolar.Text = "Antenna Pattern (Polar)"
         Me.TAPolar.UseVisualStyleBackColor = True
         '
+        'CheckBox3
+        '
+        Me.CheckBox3.AutoSize = True
+        Me.CheckBox3.Checked = True
+        Me.CheckBox3.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CheckBox3.Location = New System.Drawing.Point(702, 484)
+        Me.CheckBox3.Name = "CheckBox3"
+        Me.CheckBox3.Size = New System.Drawing.Size(122, 17)
+        Me.CheckBox3.TabIndex = 64
+        Me.CheckBox3.Text = "Tool tip Help Enable"
+        Me.CheckBox3.UseVisualStyleBackColor = True
+        '
         'GBLog
         '
         Me.GBLog.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -1141,6 +1153,18 @@ Partial Class FormDirect
         Me.TXYAP.Text = "Power Vs Angle (XY chart)"
         Me.TXYAP.UseVisualStyleBackColor = True
         '
+        'CBTTH
+        '
+        Me.CBTTH.AutoSize = True
+        Me.CBTTH.Checked = True
+        Me.CBTTH.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CBTTH.Location = New System.Drawing.Point(702, 484)
+        Me.CBTTH.Name = "CBTTH"
+        Me.CBTTH.Size = New System.Drawing.Size(122, 17)
+        Me.CBTTH.TabIndex = 64
+        Me.CBTTH.Text = "Tool tip Help Enable"
+        Me.CBTTH.UseVisualStyleBackColor = True
+        '
         'CBmaxYax
         '
         Me.CBmaxYax.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -1189,7 +1213,7 @@ Partial Class FormDirect
         Me.GBBarChartLvlDF.Controls.Add(Me.ZedGraphAP)
         Me.GBBarChartLvlDF.Location = New System.Drawing.Point(9, 22)
         Me.GBBarChartLvlDF.Name = "GBBarChartLvlDF"
-        Me.GBBarChartLvlDF.Size = New System.Drawing.Size(732, 545)
+        Me.GBBarChartLvlDF.Size = New System.Drawing.Size(732, 456)
         Me.GBBarChartLvlDF.TabIndex = 14
         Me.GBBarChartLvlDF.TabStop = False
         Me.GBBarChartLvlDF.Text = "AP Caertesian Plot"
@@ -1207,7 +1231,7 @@ Partial Class FormDirect
         Me.ZedGraphAP.Location = New System.Drawing.Point(13, 19)
         Me.ZedGraphAP.Name = "ZedGraphAP"
         Me.ZedGraphAP.PointValueFormat = "G"
-        Me.ZedGraphAP.Size = New System.Drawing.Size(650, 412)
+        Me.ZedGraphAP.Size = New System.Drawing.Size(713, 431)
         Me.ZedGraphAP.TabIndex = 8
         '
         'Func_tab
@@ -1620,11 +1644,11 @@ Partial Class FormDirect
         '
         'TXYFAF
         '
-        Me.TXYFAF.Controls.Add(Me.CheckBox1)
-        Me.TXYFAF.Controls.Add(Me.Label6)
         Me.TXYFAF.Controls.Add(Me.CBYmaxFAF)
-        Me.TXYFAF.Controls.Add(Me.CBYminFAF)
         Me.TXYFAF.Controls.Add(Me.Label5)
+        Me.TXYFAF.Controls.Add(Me.CBYminFAF)
+        Me.TXYFAF.Controls.Add(Me.Label6)
+        Me.TXYFAF.Controls.Add(Me.CheckBox1)
         Me.TXYFAF.Controls.Add(Me.GroupBox2)
         Me.TXYFAF.Location = New System.Drawing.Point(4, 22)
         Me.TXYFAF.Margin = New System.Windows.Forms.Padding(2)
@@ -1635,45 +1659,17 @@ Partial Class FormDirect
         Me.TXYFAF.Text = "Antenna Factor Vs Frequency (XY chart)"
         Me.TXYFAF.UseVisualStyleBackColor = True
         '
-        'Label6
+        'CheckBox1
         '
-        Me.Label6.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(746, 300)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(36, 13)
-        Me.Label6.TabIndex = 40
-        Me.Label6.Text = "Y(min)"
-        '
-        'CBYmaxFAF
-        '
-        Me.CBYmaxFAF.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.CBYmaxFAF.FormattingEnabled = True
-        Me.CBYmaxFAF.Items.AddRange(New Object() {"+100 dB", "+90 dB", "+80 dB", "+70 dB", "+60 dB", "+50 dB", "+40 dB", "+30 dB", "+20 dB", "+10 dB", "     0 dB", " -10 dB", " -20 dB", " -30 dB", " -40 dB", " -50 dB", " -60 dB", " -70 dB", " -80 dB", " -90 dB", "-100 dB", "-110 dB", "-120 dB", "-130 dB", "-140 dB", "-150 dB", "-160 dB", "-170 dB", "-180 dB"})
-        Me.CBYmaxFAF.Location = New System.Drawing.Point(749, 276)
-        Me.CBYmaxFAF.Name = "CBYmaxFAF"
-        Me.CBYmaxFAF.Size = New System.Drawing.Size(65, 21)
-        Me.CBYmaxFAF.TabIndex = 38
-        '
-        'CBYminFAF
-        '
-        Me.CBYminFAF.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.CBYminFAF.FormattingEnabled = True
-        Me.CBYminFAF.Items.AddRange(New Object() {"+100 dB", "+90 dB", "+80 dB", "+70 dB", "+60 dB", "+50 dB", "+40 dB", "+30 dB", "+20 dB", "+10 dB", "     0 dB", " -10 dB", " -20 dB", " -30 dB", " -40 dB", " -50 dB", " -60 dB", " -70 dB", " -80 dB", " -90 dB", "-100 dB", "-110 dB", "-120 dB", "-130 dB", "-140 dB", "-150 dB", "-160 dB", "-170 dB", "-180 dB"})
-        Me.CBYminFAF.Location = New System.Drawing.Point(749, 316)
-        Me.CBYminFAF.Name = "CBYminFAF"
-        Me.CBYminFAF.Size = New System.Drawing.Size(65, 21)
-        Me.CBYminFAF.TabIndex = 39
-        '
-        'Label5
-        '
-        Me.Label5.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(746, 249)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(39, 13)
-        Me.Label5.TabIndex = 37
-        Me.Label5.Text = "Y(max)"
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Checked = True
+        Me.CheckBox1.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CheckBox1.Location = New System.Drawing.Point(702, 484)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(122, 17)
+        Me.CheckBox1.TabIndex = 66
+        Me.CheckBox1.Text = "Tool tip Help Enable"
+        Me.CheckBox1.UseVisualStyleBackColor = True
         '
         'GroupBox2
         '
@@ -1683,7 +1679,7 @@ Partial Class FormDirect
         Me.GroupBox2.Controls.Add(Me.ZedFAF)
         Me.GroupBox2.Location = New System.Drawing.Point(7, 6)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(732, 545)
+        Me.GroupBox2.Size = New System.Drawing.Size(698, 472)
         Me.GroupBox2.TabIndex = 15
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "AF Caertesian Plot"
@@ -1697,50 +1693,54 @@ Partial Class FormDirect
         Me.ZedFAF.BackColor = System.Drawing.Color.White
         Me.ZedFAF.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ZedFAF.IsShowPointValues = True
-        Me.ZedFAF.Location = New System.Drawing.Point(16, 19)
+        Me.ZedFAF.Location = New System.Drawing.Point(6, 19)
         Me.ZedFAF.Name = "ZedFAF"
         Me.ZedFAF.PointValueFormat = "G"
-        Me.ZedFAF.Size = New System.Drawing.Size(696, 448)
+        Me.ZedFAF.Size = New System.Drawing.Size(686, 447)
         Me.ZedFAF.TabIndex = 8
         '
         'SerialPort
         '
         '
-        'CBTTH
+        'CBYmaxFAF
         '
-        Me.CBTTH.AutoSize = True
-        Me.CBTTH.Checked = True
-        Me.CBTTH.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CBTTH.Location = New System.Drawing.Point(702, 484)
-        Me.CBTTH.Name = "CBTTH"
-        Me.CBTTH.Size = New System.Drawing.Size(122, 17)
-        Me.CBTTH.TabIndex = 64
-        Me.CBTTH.Text = "Tool tip Help Enable"
-        Me.CBTTH.UseVisualStyleBackColor = True
+        Me.CBYmaxFAF.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.CBYmaxFAF.FormattingEnabled = True
+        Me.CBYmaxFAF.Items.AddRange(New Object() {"+100 dB", "+90 dB", "+80 dB", "+70 dB", "+60 dB", "+50 dB", "+40 dB", "+30 dB", "+20 dB", "+10 dB", "     0 dB", " -10 dB", " -20 dB", " -30 dB", " -40 dB", " -50 dB", " -60 dB", " -70 dB", " -80 dB", " -90 dB", "-100 dB", "-110 dB", "-120 dB", "-130 dB", "-140 dB", "-150 dB", "-160 dB", "-170 dB", "-180 dB"})
+        Me.CBYmaxFAF.Location = New System.Drawing.Point(724, 246)
+        Me.CBYmaxFAF.Name = "CBYmaxFAF"
+        Me.CBYmaxFAF.Size = New System.Drawing.Size(77, 21)
+        Me.CBYmaxFAF.TabIndex = 69
         '
-        'CheckBox3
+        'Label5
         '
-        Me.CheckBox3.AutoSize = True
-        Me.CheckBox3.Checked = True
-        Me.CheckBox3.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CheckBox3.Location = New System.Drawing.Point(702, 484)
-        Me.CheckBox3.Name = "CheckBox3"
-        Me.CheckBox3.Size = New System.Drawing.Size(122, 17)
-        Me.CheckBox3.TabIndex = 64
-        Me.CheckBox3.Text = "Tool tip Help Enable"
-        Me.CheckBox3.UseVisualStyleBackColor = True
+        Me.Label5.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(721, 283)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(36, 13)
+        Me.Label5.TabIndex = 68
+        Me.Label5.Text = "Y(min)"
         '
-        'CheckBox1
+        'CBYminFAF
         '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Checked = True
-        Me.CheckBox1.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CheckBox1.Location = New System.Drawing.Point(702, 484)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(122, 17)
-        Me.CheckBox1.TabIndex = 66
-        Me.CheckBox1.Text = "Tool tip Help Enable"
-        Me.CheckBox1.UseVisualStyleBackColor = True
+        Me.CBYminFAF.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.CBYminFAF.FormattingEnabled = True
+        Me.CBYminFAF.Items.AddRange(New Object() {"+20 dB", "+10 dB", "     0 dB", " -10 dB", " -20 dB", " -30 dB", " -40 dB", " -50 dB", " -60 dB", " -70 dB", " -80 dB", " -90 dB", "-100 dB", "-110 dB", "-120 dB", "-130 dB", "-140 dB", "-150 dB", "-160 dB", "-170 dB", "-180 dB"})
+        Me.CBYminFAF.Location = New System.Drawing.Point(724, 309)
+        Me.CBYminFAF.Name = "CBYminFAF"
+        Me.CBYminFAF.Size = New System.Drawing.Size(77, 21)
+        Me.CBYminFAF.TabIndex = 70
+        '
+        'Label6
+        '
+        Me.Label6.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(721, 218)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(39, 13)
+        Me.Label6.TabIndex = 67
+        Me.Label6.Text = "Y(max)"
         '
         'FormDirect
         '
@@ -1945,10 +1945,6 @@ Partial Class FormDirect
     Friend WithEvents TXYFAF As Windows.Forms.TabPage
     Friend WithEvents GroupBox2 As Windows.Forms.GroupBox
     Friend WithEvents ZedFAF As ZedGraph.ZedGraphControl
-    Friend WithEvents Label6 As Windows.Forms.Label
-    Friend WithEvents CBYmaxFAF As Windows.Forms.ComboBox
-    Friend WithEvents CBYminFAF As Windows.Forms.ComboBox
-    Friend WithEvents Label5 As Windows.Forms.Label
     Friend WithEvents Label7 As Windows.Forms.Label
     Friend WithEvents Label8 As Windows.Forms.Label
     Friend WithEvents CBBFreq As Windows.Forms.ComboBox
@@ -1958,4 +1954,8 @@ Partial Class FormDirect
     Friend WithEvents CheckBox3 As Windows.Forms.CheckBox
     Friend WithEvents CBTTH As Windows.Forms.CheckBox
     Friend WithEvents CheckBox1 As Windows.Forms.CheckBox
+    Friend WithEvents CBYmaxFAF As Windows.Forms.ComboBox
+    Friend WithEvents Label5 As Windows.Forms.Label
+    Friend WithEvents CBYminFAF As Windows.Forms.ComboBox
+    Friend WithEvents Label6 As Windows.Forms.Label
 End Class
